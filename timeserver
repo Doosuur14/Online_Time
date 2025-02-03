@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Check if a port is passed as an argument
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <port>"
+    exit 1
+fi
+
+# Assign the port from the command line argument
+PORT=$1
+
+# Start the server and listen on the specified port
+while true; do
+    # Wait for an incoming connection
+    echo "Server is listening on port $PORT..."
+    # Use netcat to handle the incoming connection and send the date-time
+    # netcat will send the date-time when a client connects
+    echo $(date +"%d.%m.%Y %H:%M") | nc -l -p $PORT -q 1
+done
